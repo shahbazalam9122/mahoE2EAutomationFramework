@@ -1,0 +1,331 @@
+In Playwright with TypeScript, assertions are used to verify whether the actual result matches the expected result. Since you're building a Playwright + Cucumber + TypeScript framework, I'll cover the commonly used assertions with ready-to-use code.
+
+Playwright assertions are available from @playwright/test, even when you're using Playwright with Cucumber.
+
+1. Import assertions
+import { expect } from "@playwright/test";
+2. Web-first assertions (most commonly used)
+
+These assertions automatically retry until the condition is met or the timeout expires.
+
+Assume you're testing this page:
+
+Element is visible  -  await expect(page.locator("#home")).toBeVisible();
+
+Element is hidden - await expect(page.locator("#loader")).toBeHidden();
+
+Element exists in DOM - await expect(page.locator("#home")).toBeAttached();
+
+Element is not in DOM - await expect(page.locator("#home")).not.toBeAttached();
+
+Element is enabled - await expect(page.locator("#submit")).toBeEnabled();
+
+Element is disabled - await expect(page.locator("#submit")).toBeDisabled();
+
+Element is editable - await expect(page.locator("#username")).toBeEditable();
+
+Element is focused - await expect(page.locator("#username")).toBeFocused();
+
+Element is checked - await expect(page.locator("#terms")).toBeChecked();
+
+Element is empty - await expect(page.locator("#message")).toBeEmpty();
+
+Element has a class - await expect(page.locator("#home")).toHaveClass(/active/);
+
+Element has an ID - await expect(page.locator("#home")).toHaveId("home");
+
+Element has an attribute - await expect(page.locator("#home")).toHaveAttribute("role", "main");
+
+Element has a CSS property - await expect(page.locator("#home")).toHaveCSS("display", "block");
+
+Element has text - await expect(page.locator("h1")).toHaveText("Home Page");
+
+Element contains text - await expect(page.locator("h1")).toContainText("Home");
+
+Input has a value - await expect(page.locator("#username")).toHaveValue("Shahbaz");
+
+Input contains a value - await expect(page.locator("#username")).toHaveValue(/Shah/);
+
+Element count matches - await expect(page.locator(".product")).toHaveCount(5);
+
+Element has accessible name - await expect(page.getByRole("button")).toHaveAccessibleName("Login");
+
+Element has accessible description - await expect(page.getByRole("button")).toHaveAccessibleDescription("Submit login form");
+
+Element matches a URL - await expect(page).toHaveURL(/electronics/);
+
+Page has a title - await expect(page).toHaveTitle("Electronics");
+
+3. Text assertions
+// Exact text match
+await expect(page.locator("h1")).toHaveText("Welcome");
+
+// Partial text match
+await expect(page.locator("h1")).toContainText("Welcome");
+
+// Text using a regular expression
+await expect(page.locator("h1")).toHaveText(/Welcome/i);
+
+// Multiple elements' text
+await expect(page.locator(".product-name")).toHaveText([
+    "Laptop",
+    "Mobile",
+    "Keyboard"
+]);
+
+// Verify text is not equal to the expected text
+await expect(page.locator("h1")).not.toHaveText("Error");
+
+// Verify text is not contained
+await expect(page.locator("h1")).not.toContainText("Failed");
+4. Page and URL assertions
+// Verify exact URL
+await expect(page).toHaveURL(
+    "https://demo.mahocommerce.com/default/electronics/"
+);
+
+// Verify URL using a regular expression
+await expect(page).toHaveURL(/electronics/);
+
+// Verify URL does not match
+await expect(page).not.toHaveURL(/login/);
+
+// Verify exact page title
+await expect(page).toHaveTitle("Electronics");
+
+// Verify title using a regular expression
+await expect(page).toHaveTitle(/Electronics/i);
+
+// Verify title does not match
+await expect(page).not.toHaveTitle(/Error/);
+5. Input and form assertions
+// Verify input value
+await expect(page.locator("#username")).toHaveValue("admin");
+
+// Verify input is empty
+await expect(page.locator("#username")).toHaveValue("");
+
+// Verify input is checked
+await expect(page.locator("#checkbox")).toBeChecked();
+
+// Verify input is unchecked
+await expect(page.locator("#checkbox")).not.toBeChecked();
+
+// Verify input is editable
+await expect(page.locator("#username")).toBeEditable();
+
+// Verify input is disabled
+await expect(page.locator("#username")).toBeDisabled();
+
+// Verify input is enabled
+await expect(page.locator("#username")).toBeEnabled();
+
+// Verify input is focused
+await expect(page.locator("#username")).toBeFocused();
+
+// Verify input is empty of content
+await expect(page.locator("#message")).toBeEmpty();
+6. Element state and attribute assertions
+// Visible
+await expect(page.locator("#home")).toBeVisible();
+
+// Hidden
+await expect(page.locator("#loader")).toBeHidden();
+
+// Attached to DOM
+await expect(page.locator("#home")).toBeAttached();
+
+// Detached from DOM
+await expect(page.locator("#loader")).not.toBeAttached();
+
+// Verify CSS class
+await expect(page.locator("#home")).toHaveClass("active");
+
+// Verify ID
+await expect(page.locator("#home")).toHaveId("home");
+
+// Verify attribute
+await expect(page.locator("#home")).toHaveAttribute("role", "main");
+
+// Verify attribute using a regular expression
+await expect(page.locator("#home")).toHaveAttribute("class", /active/);
+
+// Verify CSS property
+await expect(page.locator("#home")).toHaveCSS("display", "block");
+
+// Verify element count
+await expect(page.locator(".product")).toHaveCount(10);
+
+// Verify accessible role
+await expect(page.getByRole("button", { name: "Login" }))
+    .toBeVisible();
+
+// Verify accessible name
+await expect(page.getByRole("button", { name: "Login" }))
+    .toHaveAccessibleName("Login");
+7. Generic assertions using expect()
+
+These assertions are useful when you want to validate variables, calculations, API responses, or other values. Unlike locator assertions, they do not automatically retry.
+
+// Equality
+expect(10).toBe(10);
+
+// Strict inequality
+expect(10).not.toBe(20);
+
+// Deep equality for objects and arrays
+expect({ name: "Shahbaz" }).toEqual({ name: "Shahbaz" });
+
+// Greater than
+expect(10).toBeGreaterThan(5);
+
+// Greater than or equal
+expect(10).toBeGreaterThanOrEqual(10);
+
+// Less than
+expect(5).toBeLessThan(10);
+
+// Less than or equal
+expect(5).toBeLessThanOrEqual(5);
+
+// Null
+expect(null).toBeNull();
+
+// Undefined
+expect(undefined).toBeUndefined();
+
+// Defined
+expect("Hello").toBeDefined();
+
+// Truthy
+expect("Hello").toBeTruthy();
+
+// Falsy
+expect(0).toBeFalsy();
+
+// Instance of a class
+expect(new Date()).toBeInstanceOf(Date);
+
+// String contains a substring
+expect("Playwright").toContain("wright");
+
+// Array contains an item
+expect(["Laptop", "Mobile"]).toContain("Laptop");
+
+// Array has a matching length
+expect(["Laptop", "Mobile"]).toHaveLength(2);
+
+// String matches a regular expression
+expect("Hello World").toMatch(/Hello/);
+
+// Object contains a subset of properties
+expect({ name: "Shahbaz", role: "QA" })
+    .toMatchObject({ role: "QA" });
+
+// Object has a property
+expect({ name: "Shahbaz" }).toHaveProperty("name", "Shahbaz");
+
+// Number is close to a value
+expect(0.1 + 0.2).toBeCloseTo(0.3);
+8. Soft assertions
+
+A normal assertion stops the current test step when it fails. A soft assertion records the failure but allows the remaining test code to execute. Playwright reports the failure at the end of the test.
+
+import { expect } from "@playwright/test";
+
+// Soft assertion
+await expect.soft(page.locator("h1")).toHaveText("Home Page");
+
+await expect.soft(page.locator("#logo")).toBeVisible();
+
+await expect.soft(page.locator("#footer")).toBeVisible();
+
+console.log("Remaining validations executed");
+
+Use soft assertions when you want to validate multiple independent elements on the same page.
+
+9. Custom timeout and negation
+// Custom timeout: wait up to 10 seconds for the assertion
+await expect(page.locator("#home")).toBeVisible({
+    timeout: 10000
+});
+
+// Negate an assertion
+await expect(page.locator("#error")).not.toBeVisible({
+    timeout: 5000
+});
+
+// Custom message for a failed assertion
+await expect(
+    page.locator("h1"),
+    "Home page heading should be displayed"
+).toHaveText("Home Page");
+10. Screenshot assertions
+
+Playwright also supports visual regression assertions.
+
+// Compare a screenshot of the page
+await expect(page).toHaveScreenshot("home-page.png");
+
+// Compare a screenshot of a specific element
+await expect(page.locator("#home"))
+    .toHaveScreenshot("home-section.png");
+
+These assertions require the screenshot baseline to be configured or generated as part of the visual testing workflow.
+
+11. API response assertions
+
+Since your framework may also include API testing, you can use generic assertions with REST responses.
+
+const response = await page.request.get(
+    "https://jsonplaceholder.typicode.com/posts/1"
+);
+
+expect(response.status()).toBe(200);
+expect(response.ok()).toBeTruthy();
+
+const responseBody = await response.json();
+
+expect(responseBody).toHaveProperty("id", 1);
+expect(responseBody).toHaveProperty("title");
+expect(responseBody.userId).toBeGreaterThan(0);
+12. Important: Assertions in Cucumber step definitions
+
+Here is a complete example using your pageFixture pattern.
+
+Writing
+import { Given } from "@cucumber/cucumber";
+import { expect } from "@playwright/test";
+import { pageFixture } from "../../hooks/pageFixture";
+
+Given("User validate the home page loaded successfully", async function () {
+
+    const page = pageFixture.page;
+
+    // Page assertions
+    await expect(page).toHaveURL(/electronics/);
+
+    // Element assertions
+    await expect(page.locator("body")).toBeVisible();
+
+    // Heading assertion
+    await expect(page.locator("h1")).toBeVisible();
+
+    // Count assertion
+    await expect(page.locator(".product")).toHaveCount(5);
+
+    // Generic assertion
+    expect(2 + 2).toBe(4);
+
+});
+What is this?
+
+Replace the heading selector and product selector with locators that actually exist on your website.
+
+Important: In a Cucumber framework, use expect from @playwright/test for Playwright assertions. You don't need to replace Cucumber with Playwright Test's test() function.
+
+For the official, complete reference, see the 
+Playwright Assertions documentation
+.
+
+My recommendation: learn toBeVisible(), toHaveText(), toContainText(), toHaveValue(), toBeEnabled(), toBeDisabled(), toHaveCount(), toHaveURL(), and toHaveTitle() first. These will cover a large part of everyday UI automation.

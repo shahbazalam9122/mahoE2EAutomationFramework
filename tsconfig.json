@@ -1,0 +1,31 @@
+// {
+//   "compilerOptions": {
+//         "typeRoots" :[
+//       "./node_modules/@types",
+//       "src/helper/types"
+//     ],
+//     "target": "ES2020",
+//     "module": "commonjs",
+//     "moduleResolution": "node",
+//     "esModuleInterop": true,
+//     "strict": false,
+//     "types": ["node"]
+//   }
+// }
+
+
+
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["node", "@playwright/test"],
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "features/**/*.ts", "playwright.config.ts", "cucumber.js"]
+}

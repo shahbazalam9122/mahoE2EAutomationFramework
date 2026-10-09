@@ -1,0 +1,19 @@
+{
+  "default":{
+    "formatOptions":{
+        "snippetInterface": "async-await"
+    },
+    "paths":[
+      "src/pomtest/Features/"
+    ],
+    "publishQuiet":true,
+    "dryRun":true,
+    "require":[
+      "src/pomtest/Pages/*.ts"
+    ],
+    "requireModule":[
+      "ts-node/register"
+    ]
+
+  }
+}
