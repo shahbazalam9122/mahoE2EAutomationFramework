@@ -2,7 +2,7 @@ import {Given, setDefaultTimeout} from '@cucumber/cucumber';
 import { Page,chromium,expect } from '@playwright/test';
 import { pageFixture } from '../support/pageFixture';
 import { Logger } from 'winston';
-import { homePage } from '../pages/homePagePage';
+import { homePage } from '../pages/homePage';
 
 
 const homePageObj = new homePage();

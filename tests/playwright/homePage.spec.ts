@@ -1,7 +1,7 @@
 
 import { test,Page,chromium,expect } from '@playwright/test';
 import { Logger } from 'winston';
-import { homePage } from '../../src/pages/homePagePage';
+import { homePage } from '../../src/pages/homePage';
 import { pageFixture } from '../../src/support/pageFixture';
 
 
