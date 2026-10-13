@@ -1,6 +1,6 @@
 
-import { test,Page,chromium,expect } from '@playwright/test';
-import { Logger } from 'winston';
+import 'dotenv/config';
+import { test } from '@playwright/test';
 import { homePage } from '../../src/pages/homePagePage';
 import { pageFixture } from '../../src/support/pageFixture';
 
