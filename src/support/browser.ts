@@ -1,6 +1,6 @@
 import { chromium, firefox, LaunchOptions, webkit } from "playwright-core";
 import * as dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({quiet:true});
 
 
 const browser = process.env.BROWSER;

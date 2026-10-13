@@ -1,0 +1,8 @@
+{
+    "homePageImgBanner":"//img[@alt='Electronics']",
+    "homePageProductList":"//h2[@class='product-name']",
+    "homeNavCategories":"//ol[@class='nav-primary']/li",
+    "homePageSidePanelCategories":"//dl[@id='narrow-by-list']/dt",
+    "diffLanguageDropdown":".form-language",
+    "differnetLanguegeList":"//select[@id='select-language']/option"
+}
