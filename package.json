@@ -4,12 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean:reports": "rimraf allure-results allure-report",
+
+    "pretest": "npm run clean:reports",
     "test": "npm run test:playwright",
+
+    "pretest:playwright": "npm run clean:reports",
     "test:playwright": "playwright test",
+
+    "pretest:playwright:headed": "npm run clean:reports",
     "test:playwright:headed": "playwright test --headed",
+
+    "pretest:cucumber": "npm run clean:reports",
     "test:cucumber": "cucumber-js",
+
+    "pretest:cucumber:headed": "npm run clean:reports",
     "test:cucumber:headed": "cross-env HEADED=1 cucumber-js",
+
+    "pretest:all": "npm run clean:reports",
     "test:all": "npm run test:playwright && npm run test:cucumber",
+   
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -27,6 +41,7 @@
     "dotenv": "^18.0.6",
     "fs-extra": "^11.4.1",
     "multiple-cucumber-html-reporter": "^4.3.0",
+    "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },

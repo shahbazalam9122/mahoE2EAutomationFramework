@@ -1,0 +1,3 @@
+npm run test:playwright:headed -- loginPage.spec.ts
+npm run test:cucumber:headed    
+npm run test:playwright:headed  

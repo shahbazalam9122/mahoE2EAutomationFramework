@@ -1,30 +1,7 @@
-
-
-
-// import locators from '../../Resources/locators/homepage.json';
-
-
-
-// export function getLocator(selector: string): string {
-//     if (!selector.trim()) {
-//         throw new Error('A locator selector must be provided.');
-//     }
-
-//     const locator = locators[selector as keyof typeof locators];
-
-//     if (!locator) {
-//         throw new Error(`Locator not found for key: ${selector}`);
-//     }
-
-//     return locator;
-// }
-
-
-
-
-
 import * as fs from 'fs';
 import * as path from 'path';
+import * as allure from 'allure-js-commons';
+import { pageFixture } from '../support/pageFixture';
 
 // Adjust the path to point directly to your locators folder
 const LOCATORS_DIR = path.resolve(__dirname, '../../Resources/locators');
@@ -73,7 +50,7 @@ function loadAllLocators(dirPath: string): Record<string, string> {
 }
 
 /**
- * Returns the resolved locator string for the given key.
+ * Returns the resolved static locator string for the given key.
  */
 export function getLocator(key: string): string {
   if (!key || !key.trim()) {
@@ -85,7 +62,7 @@ export function getLocator(key: string): string {
     locatorMap = loadAllLocators(LOCATORS_DIR);
   }
 
-  const locator = locatorMap[key];
+  const locator = locatorMap[key.trim()];
 
   if (!locator) {
     throw new Error(
@@ -94,4 +71,31 @@ export function getLocator(key: string): string {
   }
 
   return locator;
+}
+
+/**
+ * Retrieves the locator by key and replaces instances of 'XXXX' with dynamic values.
+ * 
+ * Supports:
+ * 1. Single replacement: getLocatorWithUpdate("loginPageTxtBox", "email")
+ * 2. Multiple sequential replacements: getLocatorWithUpdate("rowCell", "row-1", "col-2")
+ */
+export function getLocatorWithUpdate(
+  key: string,
+  replacement: string,
+  ...additionalReplacements: string[]
+): string {
+  let locator = getLocator(key);
+  const replacements = [replacement, ...additionalReplacements];
+
+  for (const value of replacements) {
+    locator = locator.replace('XXXX', value);
+  }
+
+  return locator;
+}
+
+export async function attachScreenshotToAllure(stepName: string = 'Step Screenshot'): Promise<void> {
+    const screenshot = await pageFixture.page.screenshot({ fullPage: true });
+    await allure.attachment(stepName, screenshot, 'image/png');
 }

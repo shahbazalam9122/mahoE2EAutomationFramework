@@ -1,0 +1,10 @@
+WEB VALUE : Fashion |  PARAMETER VALUE : Fashion
+WEB VALUE : Electronics |  PARAMETER VALUE : Electronics
+WEB VALUE : Food |  PARAMETER VALUE : Food
+WEB VALUE : Books |  PARAMETER VALUE : Books
+WEB VALUE : Jewelry |  PARAMETER VALUE : Jewelry
+WEB VALUE : Beauty |  PARAMETER VALUE : Beauty
+WEB VALUE : Home |  PARAMETER VALUE : Home
+WEB VALUE : Sports |  PARAMETER VALUE : Sports
+WEB VALUE : Kids |  PARAMETER VALUE : Kids
+WEB VALUE : Garden |  PARAMETER VALUE : Garden
